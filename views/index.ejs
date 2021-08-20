@@ -1,0 +1,67 @@
+<%- include('partials/header') -%>
+
+<h1>Humber Courses</h1>
+<style>
+    .delete{
+        color:red;
+        font-size: 15px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    li{
+        position: relative;
+    }
+    li span:first-of-type{
+         width: 15px;
+           height: 15px;
+           position: absolute;
+            left: -20px;
+           top: 4px;
+           border-radius: 50%;
+    }
+</style>
+<% if(courses.length > 0){ %>
+
+
+<ul>
+
+    <% courses.forEach(course => { %>
+       <li id="<%= course.id %>">
+          <span style="background:<%= course.colour%>;"></span>
+         <a href="/course/<%= course.id %> "> <%= course.name %> </a>
+         <span class="delete">&#10005;</span>
+       </li>
+    <% }) %>
+   
+</ul>
+
+<% }  else { %>
+
+    <p>Whoops! No Courses Found.</p>
+
+<% } %>
+<%- include('partials/footer') -%>
+<a href="/add-course"><button>Add New Course</button></button></a>
+<script>
+    window.addEventListener("DOMContentLoaded",function(){
+        console.log("loaded");
+        const clickHandler = (event) => {
+            console.log("clicked", event.currentTarget.parentElement.id);
+            fetch("/delete-course",{
+                method:"post",
+                headers:{
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({id:event.currentTarget.parentElement.id}),
+
+            }).then(res => {
+                window.location.reload();
+            }).catch((err) => console.log("Error:",err));
+        };
+        Array.from(document.getElementsByClassName("delete")).forEach(btn=> {
+         console.log("btn", btn);
+         btn.addEventListener("click",clickHandler, false);
+        });
+    });
+</script>

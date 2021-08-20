@@ -1,0 +1,25 @@
+<%- include('partials/header') -%>
+
+
+<h1>Course Details</h1>
+<form action="/update-course" method="post">
+    <form action="/submit-course-added" method="post">
+        Course Name: 
+        <input type="text" name="name" value="<%= course.name%>" />
+        <br />
+        <br />
+        Course Colour: 
+        <input type="text" name="colour"  value="<%= course.colour%>"/>
+        <br />
+        <input type="hidden" name="id"  value="<%= course.id%>"/>
+        <p>Course ID: <%= course.id %> </p>
+        <input type="submit" value="Update" />
+        </form>
+        <br />
+        <a href="/"><button>Back to Homepage</button></button></a>
+</form>
+
+
+
+
+<%- include('partials/footer') -%>

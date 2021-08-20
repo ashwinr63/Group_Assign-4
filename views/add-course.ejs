@@ -1,0 +1,18 @@
+<%- include('partials/header') -%>
+
+<h1>Add Course</h1>
+<form action="/submit-course-added" method="post">
+Course Name: 
+<input type="text" name="name" />
+<br />
+<br />
+Course Colour: 
+<input type="text" name="colour" />
+<br />
+<br />
+<input type="submit" />
+</form>
+<br />
+<a href="/"><button>Back to Homepage</button></button></a>
+
+<%- include('partials/footer') -%>
